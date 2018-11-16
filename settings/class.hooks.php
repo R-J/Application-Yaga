@@ -740,7 +740,7 @@ class YagaHooks implements Gdn_IPlugin {
    */
   public function Base_Render_Before($Sender) {
     if($Sender->MasterView == 'admin') {
-      $Sender->AddCssFile('yaga.css', 'yaga');
+      // $Sender->AddCssFile('yaga.css', 'yaga');
     }
     else {
       if(Gdn::Session()->IsValid() && is_object($Sender->Menu) && C('Yaga.MenuLinks.Show')) {

@@ -36,7 +36,7 @@ class YagaController extends DashboardController {
 
   /**
    * Redirect to settings by default
-   * 
+   *
    * @since 1.0
    */
   public function Index() {
@@ -45,7 +45,7 @@ class YagaController extends DashboardController {
 
   /**
    * This handles all the core settings for the gamification application.
-   * 
+   *
    * @since 1.0
    */
   public function Settings() {
@@ -58,42 +58,42 @@ class YagaController extends DashboardController {
     $ConfigModule->Initialize(array(
         'Yaga.Reactions.Enabled' => array(
             'LabelCode' => 'Yaga.Reactions.Use',
-            'Control' => 'Checkbox'
+            'Control' => 'toggle'
         ),
         'Yaga.Badges.Enabled' => array(
             'LabelCode' => 'Yaga.Badges.Use',
-            'Control' => 'Checkbox'
+            'Control' => 'toggle'
         ),
         'Yaga.Ranks.Enabled' => array(
             'LabelCode' => 'Yaga.Ranks.Use',
-            'Control' => 'Checkbox'
+            'Control' => 'toggle'
         ),
         'Yaga.MenuLinks.Show' => array(
             'LabelCode' => 'Yaga.MenuLinks.Show',
-            'Control' => 'Checkbox'
+            'Control' => 'toggle'
         ),
         'Yaga.LeaderBoard.Enabled' => array(
             'LabelCode' => 'Yaga.LeaderBoard.Use',
-            'Control' => 'Checkbox'
+            'Control' => 'toggle'
         ),
         'Yaga.LeaderBoard.Limit' => array(
             'LabelCode' => 'Yaga.LeaderBoard.Max',
-            'Control' => 'Textbox',
-            'Options' => array(
-                'Size' => 45,
-                'class' => 'SmallInput'
-            )
+            'Control' => 'textbox',
+            'Options' => [
+                'type' => 'number',
+                'step' => '1'
+            ]
         )
     ));
     $this->ConfigurationModule = $ConfigModule;
 
     $this->Render('settings');
   }
-  
+
   /**
    * Performs the necessary functions to change a backend controller into a
    * frontend controller
-   * 
+   *
    * @since 1.1
    */
   private function FrontendStyle() {
