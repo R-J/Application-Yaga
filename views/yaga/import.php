@@ -1,38 +1,31 @@
 <?php if (!defined('APPLICATION')) exit();
 /* Copyright 2014 Zachary Doll */
 
-$TransportType = $this->Data('TransportType');
-echo Wrap($this->Title(), 'h1');
-echo $this->Form->Open(array('enctype' => 'multipart/form-data'));
-echo $this->Form->Errors();
+$transportType = $this->data('TransportType');
+echo heading($this->title());
 
-echo Wrap(Wrap(T("Yaga.$TransportType.Desc"), 'div'), 'div', array('class' => 'Wrap'));
+echo wrap(t("Yaga.$transportType.Desc"), 'div', ['class' => 'padded']);
+
+echo $this->Form->open(['enctype' => 'multipart/form-data']);
+echo $this->Form->errors();
+
 ?>
 <ul>
-  <li>
-    <?php
-    echo $this->Form->Label('Yaga.Transport.File', 'FileUpload');
-    echo $this->Form->Input('FileUpload', 'file');
-    ?>
+  <li class="form-group">
+    <?php echo $this->Form->labelWrap('Yaga.Transport.File', 'FileUpload'); ?>
+    <div class="input-wrap">
+        <?php echo $this->Form->fileUpload('FileUpload'); ?>
+    </div>
   </li>
-  <li>
-    <?php
-    echo $this->Form->Label('Yaga.Reactions', 'Action');
-    echo $this->Form->Checkbox('Action');
-    ?>
+  <li class="form-group">
+    <?php echo $this->Form->toggle('Action', 'Yaga.Reactions'); ?>
   </li>
-  <li>
-    <?php
-    echo $this->Form->Label('Yaga.Badges', 'Badge');
-    echo $this->Form->Checkbox('Badge');
-    ?>
+  <li class="form-group">
+    <?php echo $this->Form->toggle('Badge', 'Yaga.Badges'); ?>
   </li>
-  <li>
-    <?php
-    echo $this->Form->Label('Yaga.Ranks', 'Rank');
-    echo $this->Form->Checkbox('Rank');
-    ?>
+  <li class="form-group">
+    <?php echo $this->Form->toggle('Rank', 'Yaga.Ranks'); ?>
   </li>
 </ul>
 <?php
-echo $this->Form->Close($TransportType);
+echo $this->Form->close($transportType);
