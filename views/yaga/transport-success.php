@@ -1,30 +1,33 @@
 <?php if (!defined('APPLICATION')) exit();
 /* Copyright 2014 Zachary Doll */
 
-$TransportType = $this->Data('TransportType');
-$Filename = $this->Data('TransportPath');
-$ActionCount = $this->Data('ActionCount', NULL);
-$BadgeCount = $this->Data('BadgeCount', NULL);
-$RankCount = $this->Data('RankCount', NULL);
-$ImageCount = $this->Data('ImageCount', NULL);
+$transportType = $this->data('TransportType');
+$filename = $this->data('TransportPath');
+$actionCount = $this->data('ActionCount', null);
+$badgeCount = $this->data('BadgeCount', null);
+$rankCount = $this->data('RankCount', null);
+$imageCount = $this->data('ImageCount', null);
 
-echo Wrap($this->Title(), 'h1');
-echo Wrap(Wrap(sprintf(T("Yaga.$TransportType.Success"), $Filename), 'div'), 'div', array('class' => 'Wrap'));
+echo heading($this->title());
+echo wrap(sprintf(t("Yaga.$transportType.Success"), $filename), 'div', ['class' => 'padded']);
 
-$String = '';
-if($ActionCount) {
-  $String .= Wrap(T('Yaga.Reactions') . ': ' . $ActionCount, 'li');
+$string = '';
+if($actionCount) {
+  $string .= wrap(t('Yaga.Reactions') . ': ' . $actionCount, 'li');
 }
-if($BadgeCount) {
-  $String .= Wrap(T('Yaga.Badges') . ': ' . $BadgeCount, 'li');
+if($badgeCount) {
+  $string .= wrap(t('Yaga.Badges') . ': ' . $badgeCount, 'li');
 }
-if($RankCount) {
-  $String .= Wrap(T('Yaga.Ranks') . ': ' . $RankCount, 'li');
+if($rankCount) {
+  $string .= wrap(t('Yaga.Ranks') . ': ' . $rankCount, 'li');
 }
-if($ImageCount) {
-  $String .= Wrap(T('Image Files') . ': ' . $ImageCount, 'li');
+if($imageCount) {
+  $string .= wrap(t('Image Files') . ': ' . $imageCount, 'li');
 }
 
-echo WrapIf($String, 'ul', array('class' => 'Wrap'));
+echo wrapIf(wrapIf($string, 'ul'), 'div', ['class' => 'padded']);
 
-echo Wrap(Anchor(T('Yaga.Transport.Return'), 'yaga/settings'), 'div', array('class' => 'Wrap'));
+echo wrap($this->Form->linkButton(
+    t('Yaga.Transport.Return'),
+    'yaga/settings'
+), 'div', ['class' => 'padded']);
