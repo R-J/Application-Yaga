@@ -234,7 +234,7 @@ class YagaController extends DashboardController {
       $this->Render('transport-success');
     }
     else {
-      $this->Render();
+      $this->Render('import');
     }
   }
 
@@ -266,7 +266,7 @@ class YagaController extends DashboardController {
       $this->Render('transport-success');
     }
     else {
-      $this->Render();
+      $this->Render('export');
     }
   }
 
