@@ -194,7 +194,7 @@ class YagaController extends DashboardController {
    * 
    * @since 1.0
    */
-  public function Import() {
+  public function YagaImport() {
     $this->Title(T('Yaga.Import'));
     $this->SetData('TransportType', 'Import');
     
@@ -243,7 +243,7 @@ class YagaController extends DashboardController {
    * 
    * @since 1.0
    */
-  public function Export() {
+  public function YagaExport() {
     $this->Title(T('Yaga.Export'));
     $this->SetData('TransportType', 'Export');
 

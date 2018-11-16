@@ -11,11 +11,11 @@ echo subheading(
 );
 echo $this->Form->linkButton(
     t('Import'),
-    'yaga/import'
+    'yaga/yagaimport'
 );
 echo $this->Form->linkButton(
     t('Export'),
-    'yaga/export'
+    'yaga/yagaexport'
 );
 
 echo helpAsset(
