@@ -323,7 +323,7 @@ class YagaController extends DashboardController {
     $ConfigData = serialize($Configs);
     $FH->addFromString('configs.yaga', $ConfigData);
     $Hashes[] = md5($ConfigData);
-    
+
     // Add actions
     if($Include['Action']) {
       $Info->Action = 'actions.yaga';
@@ -353,13 +353,19 @@ class YagaController extends DashboardController {
       $BadgeData = serialize($Badges);
       $FH->addFromString('badges.yaga', $BadgeData);
       $Hashes[] = md5($BadgeData);
+      $pattern = '/(.*\.svg)(#.*)/i';
       foreach($Badges as $Badge) {
-        array_push($Images, $Badge->Photo);
+        $badgePhoto = $Badge->Photo;
+        $svgFlag = strripos($badgePhoto, '.svg#');
+        if ($svgFlag !== false) {
+          $badgePhoto = substr($badgePhoto, 0, $svgFlag + 4);
+        }
+        array_push($Images, $badgePhoto);
       }
     }
 
     // Add in any images
-    $FilteredImages = array_filter($Images);
+    $FilteredImages = array_unique(array_filter($Images));
     $ImageCount = count($FilteredImages);
     $this->SetData('ImageCount', $ImageCount);
     if($ImageCount > 0) {
@@ -367,11 +373,13 @@ class YagaController extends DashboardController {
     }
 
     foreach($FilteredImages as $Image) {
-      if($FH->addFile('.' . $Image, 'images/' . $Image) === FALSE) {
+      // Ensure image path doesn't have a leading slash.
+      $Image = ltrim($Image, '/');
+      if($FH->addFile('./' . $Image, 'images/' . $Image) === FALSE) {
         $this->Form->AddError(sprintf(T('Yaga.Error.AddFile'), $FH->getStatusString()));
         //return FALSE;
       }
-      $Hashes[] = md5_file('.' . $Image);
+      $Hashes[] = md5_file('./' . $Image);
     }
 
     // Save all the hashes
