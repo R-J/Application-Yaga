@@ -22,10 +22,10 @@ $ApplicationInfo['Yaga'] = array(
         'Yaga.Reactions.View'   => 1, // Can a user see the reaction record?
         'Yaga.Reactions.Edit'   => 0, // Can a user remove other's reactions?
         'Yaga.Badges.Add'       => 0, // Can a user give out badges?
-        'Yaga.Badges.Manage'    => 0, // Can a user adit/edit/delete badges from the system?
+        'Yaga.Badges.Manage'    => 0, // Can a user add/edit/delete badges from the system?
         'Yaga.Badges.View'      => 1, // Can a user view badges?
         'Yaga.Ranks.Add'        => 0, // Can a user assign ranks manually?
-        'Yaga.Ranks.Manage'     => 0, // Can a user adit/edit/delete ranks from the system?
+        'Yaga.Ranks.Manage'     => 0, // Can a user add/edit/delete ranks from the system?
         'Yaga.Ranks.View'       => 1, // Can a user view ranks?
     )
 );
