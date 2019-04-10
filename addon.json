@@ -5,6 +5,7 @@
     "url": "http://github.com/hgtonight/application-yaga",
     "license": "GPLv2",
     "settingsUrl": "/yaga/settings",
+    "usePopupSettings": false,
     "settingsPermission": "Garden.Settings.Manage",
     "registerPermissions": {
         "Yaga.Reactions.Add": 0,
