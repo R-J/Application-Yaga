@@ -3,7 +3,7 @@
 
 echo heading($this->title());
 
-echo $this->ConfigurationModule->toString();
+echo $this->configurationModule->toString();
 
 echo subHeading(
   Gdn::translate('Yaga.Transport'),

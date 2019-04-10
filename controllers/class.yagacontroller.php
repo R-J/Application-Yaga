@@ -39,8 +39,8 @@ class YagaController extends DashboardController {
    * 
    * @since 1.0
    */
-  public function Index() {
-    $this->Settings();
+  public function index() {
+    $this->settings();
   }
 
   /**
@@ -48,46 +48,43 @@ class YagaController extends DashboardController {
    * 
    * @since 1.0
    */
-  public function Settings() {
-    $this->Permission('Garden.Settings.Manage');
-    $this->Title(T('Yaga.Settings'));
+  public function settings() {
+    $this->permission('Garden.Settings.Manage');
+    $this->title(Gdn::translate('Yaga.Settings'));
 
     // Get list of actions from the model and pass to the view
-    $ConfigModule = new ConfigurationModule($this);
+    $configModule = new ConfigurationModule($this);
 
-    $ConfigModule->Initialize(array(
+    $configModule->initialize(array(
         'Yaga.Reactions.Enabled' => array(
             'LabelCode' => 'Yaga.Reactions.Use',
-            'Control' => 'Checkbox'
+            'Control' => 'toggle'
         ),
         'Yaga.Badges.Enabled' => array(
             'LabelCode' => 'Yaga.Badges.Use',
-            'Control' => 'Checkbox'
+            'Control' => 'toggle'
         ),
         'Yaga.Ranks.Enabled' => array(
             'LabelCode' => 'Yaga.Ranks.Use',
-            'Control' => 'Checkbox'
+            'Control' => 'toggle'
         ),
         'Yaga.MenuLinks.Show' => array(
             'LabelCode' => 'Yaga.MenuLinks.Show',
-            'Control' => 'Checkbox'
+            'Control' => 'toggle'
         ),
         'Yaga.LeaderBoard.Enabled' => array(
             'LabelCode' => 'Yaga.LeaderBoard.Use',
-            'Control' => 'Checkbox'
+            'Control' => 'toggle'
         ),
         'Yaga.LeaderBoard.Limit' => array(
             'LabelCode' => 'Yaga.LeaderBoard.Max',
             'Control' => 'Textbox',
-            'Options' => array(
-                'Size' => 45,
-                'class' => 'SmallInput'
-            )
+            'Options' => ['type' => 'number']
         )
     ));
-    $this->ConfigurationModule = $ConfigModule;
+    $this->configurationModule = $configModule;
 
-    $this->Render('settings');
+    $this->render('settings');
   }
   
   /**
