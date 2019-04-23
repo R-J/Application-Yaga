@@ -27,3 +27,20 @@ echo subHeading(
   }
   ?>
 </ol>
+<style>
+  ol#Actions {
+    list-style-type:none;
+    padding-left:0;
+  }
+  #Actions li {
+    position:relative;
+  }
+  .Tools {
+    position:absolute;
+    right:0;
+  }
+  .Reactions .Count {
+    color: white;
+    padding: 2px 3px;
+  }
+</style>
