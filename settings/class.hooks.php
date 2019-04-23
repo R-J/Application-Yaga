@@ -57,7 +57,7 @@ class YagaHooks implements Gdn_IPlugin {
     $showBadgesSettings = Gdn::config('Yaga.Badges.Enabled', false) && ($hasSettingsPermissions || $session->checkPermission('Yaga.Badges.Manage'));
     $showRanksSettings = Gdn::config('Yaga.Ranks.Enabled', false) && ($hasSettingsPermissions || $session->checkPermission('Yaga.Ranks.Manage'));
 
-    $sender->addGroup(Gdn::translate('Gamification'), 'gamification', 'Gamification')
+    $sender->addGroup(Gdn::translate('Gamification'), 'gamification')
       ->addLinkIf($hasSettingsPermissions, Gdn::translate('Settings'), '/yaga/settings', 'gamification.settings')
       ->addLinkIf($showReactionsSettings, Gdn::translate('Yaga.Reactions'), '/action/settings', 'gamification.reactions')
       ->addLinkIf($showBadgesSettings, Gdn::translate('Yaga.Badges'), '/badge/settings', 'gamification.badges')
