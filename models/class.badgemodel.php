@@ -123,7 +123,7 @@ class BadgeModel extends Gdn_Model {
                 ->Get()
                 ->Result();
 
-        $UserIDs = ConsolidateArrayValuesByKey($UserIDSet, 'UserID');
+        $UserIDs = array_column($UserIDSet, 'UserID');
 
         // Decrement their badge count
         $this->SQL->Update('User')

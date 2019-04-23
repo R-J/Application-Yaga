@@ -28,7 +28,7 @@ class YagaController extends DashboardController {
     if($this->Menu) {
       $this->Menu->HighlightRoute('/yaga');
     }
-    $this->AddSideMenu('yaga/settings');
+    $this->setHighlightRoute('yaga/settings');
 
     $this->AddCssFile('yaga.css');
     $this->removeCssFile('magnific-popup.css');

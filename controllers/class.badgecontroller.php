@@ -43,7 +43,7 @@ class BadgeController extends DashboardController {
    */
   public function Settings($Page = '') {
     $this->Permission('Yaga.Badges.Manage');
-    $this->AddSideMenu('badge/settings');
+    $this->setHighlightRoute('badge/settings');
 
     $this->Title(T('Yaga.Badges.Manage'));
 
@@ -63,7 +63,7 @@ class BadgeController extends DashboardController {
    */
   public function Edit($BadgeID = NULL) {
     $this->Permission('Yaga.Badges.Manage');
-    $this->AddSideMenu('badge/settings');
+    $this->setHighlightRoute('badge/settings');
     $this->Form->SetModel($this->BadgeModel);
 
     // Only allow editing if some rules exist
@@ -176,7 +176,7 @@ class BadgeController extends DashboardController {
       }
     }
 
-    $this->AddSideMenu('badge/settings');
+    $this->setHighlightRoute('badge/settings');
     $this->SetData('Title', T('Yaga.Badge.Delete'));
     $this->Render();
   }
@@ -192,7 +192,7 @@ class BadgeController extends DashboardController {
       throw new Gdn_UserException(T('Yaga.Error.NeedJS'));
     }
     $this->Permission('Yaga.Badges.Manage');
-    $this->AddSideMenu('badge/settings');
+    $this->setHighlightRoute('badge/settings');
 
     $Badge = $this->BadgeModel->GetByID($BadgeID);
 
@@ -249,7 +249,7 @@ class BadgeController extends DashboardController {
    public function Award($UserID) {
     // Check permission
     $this->Permission('Yaga.Badges.Add');
-    $this->AddSideMenu('badge/settings');
+    $this->setHighlightRoute('badge/settings');
 
     // Only allow awarding if some badges exist
     if(!$this->BadgeModel->GetCount()) {

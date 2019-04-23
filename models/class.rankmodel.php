@@ -270,7 +270,7 @@ class RankModel extends Gdn_Model {
     
     // Get the user's current roles
     $CurrentRoleData = $UserModel->GetRoles($UserID);
-    $CurrentRoleIDs = ConsolidateArrayValuesByKey($CurrentRoleData->Result(), 'RoleID');
+    $CurrentRoleIDs = array_column($CurrentRoleData->Result(), 'RoleID');
 
     // Get the associated role perks
     $OldPerkRoles = $this->GetPerkRoleIDs($OldRankID);
