@@ -48,23 +48,20 @@ class YagaHooks implements Gdn_IPlugin {
   /**
    * Add the settings page links
    *
-   * @param Object $Sender
+   * @param NestedCollection $Sender
    */
-  public function Base_GetAppSettingsMenuItems_Handler($Sender) {
-    $Menu = $Sender->EventArguments['SideMenu'];
-    $Section = 'Gamification';
-    $Attrs = array('class' => $Section);
-    $Menu->AddItem($Section, $Section, FALSE, $Attrs);
-    $Menu->AddLink($Section, T('Settings'), 'yaga/settings', 'Garden.Settings.Manage');
-    if(C('Yaga.Reactions.Enabled')) {
-      $Menu->AddLink($Section, T('Yaga.Reactions'), 'action/settings', 'Yaga.Reactions.Manage');
-    }
-    if(C('Yaga.Badges.Enabled')) {
-      $Menu->AddLink($Section, T('Yaga.Badges'), 'badge/settings', 'Yaga.Badges.Manage');
-    }
-    if(C('Yaga.Ranks.Enabled')) {
-      $Menu->AddLink($Section, T('Yaga.Ranks'), 'rank/settings', 'Yaga.Ranks.Manage');
-    }
+  public function dashboardNavModule_init_handler($sender) {
+    $session = Gdn::session();
+    $hasSettingsPermissions = $session->checkPermission('Garden.Settings.Manage');
+    $showReactionsSettings = Gdn::config('Yaga.Reactions.Enabled', false) && ($hasSettingsPermissions || $session->checkPermission('Yaga.Reactions.Manage'));
+    $showBadgesSettings = Gdn::config('Yaga.Badges.Enabled', false) && ($hasSettingsPermissions || $session->checkPermission('Yaga.Badges.Manage'));
+    $showRanksSettings = Gdn::config('Yaga.Ranks.Enabled', false) && ($hasSettingsPermissions || $session->checkPermission('Yaga.Ranks.Manage'));
+
+    $sender->addGroup(Gdn::translate('Gamification'), 'gamification', 'Gamification')
+      ->addLinkIf($hasSettingsPermissions, Gdn::translate('Settings'), '/yaga/settings', 'gamification.settings')
+      ->addLinkIf($showReactionsSettings, Gdn::translate('Yaga.Reactions'), '/action/settings', 'gamification.reactions')
+      ->addLinkIf($showBadgesSettings, Gdn::translate('Yaga.Badges'), '/badge/settings', 'gamification.badges')
+      ->addLinkIf($showRanksSettings, Gdn::translate('Yaga.Ranks'), '/rank/settings', 'gamification.ranks');
   }
 
   /**
