@@ -1,16 +1,29 @@
 <?php if(!defined('APPLICATION')) exit();
 /* Copyright 2013 Zachary Doll */
 
-echo Wrap($this->Title(), 'h1');
-echo Wrap(Wrap(T('Yaga.Actions.Desc'), 'div'), 'div', array('class' => 'Wrap'));
-echo Wrap(Wrap(T('Yaga.Actions.Settings.Desc'), 'div'), 'div', array('class' => 'Wrap'));
-echo Wrap(Anchor(T('Yaga.Action.Add'), 'action/add', array('class' => 'Popup SmallButton')), 'div', array('class' => 'Wrap'));
+echo heading(
+  $this->title(),
+  Gdn::translate('Yaga.Action.Add'),
+  'action/add',
+  'js-modal btn btn-primary'
+);
+
+echo helpAsset(
+  Gdn::translate('Yaga.Reactions'),
+  Gdn::translate('Yaga.Actions.Desc')
+);
+echo subHeading(
+  Gdn::translate('Yaga.Actions.Current'),
+  Gdn::translate('Yaga.Actions.Settings.Desc')
+);
 ?>
-<h3><?php echo T('Yaga.Actions.Current'); ?></h3>
 <ol id="Actions" class="Sortable">
   <?php
-  foreach($this->Data('Actions') as $Action) {
-    echo RenderActionRow($Action);
+  $actionItem = new Gdn_Module();
+  $actionItem->setView('action-item');
+  foreach($this->data('Actions') as $action) {
+    $actionItem->setData('Action', $action);
+    echo $actionItem->toString();
   }
   ?>
 </ol>
