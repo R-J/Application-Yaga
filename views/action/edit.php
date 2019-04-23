@@ -1,71 +1,82 @@
 <?php if(!defined('APPLICATION')) exit();
 /* Copyright 2013 Zachary Doll */
+
 if(property_exists($this, 'Action')) {
-  echo Wrap(T('Yaga.Action.Edit'), 'h1');
+  echo '<h1>' . Gdn::translate('Yaga.Action.Edit') . '</h1>';
 }
 else {
-  echo Wrap(T('Yaga.Action.Add'), 'h1');
+  echo '<h1>' . Gdn::translate('Yaga.Action.Add') . '</h1>';
 }
-
-$OriginalCssClass = $this->Form->GetValue('CssClass');
-
-echo $this->Form->Open(array('class' => 'Action'));
-echo $this->Form->Errors();
+echo $this->Form->open(['class' => 'Action']);
+echo $this->Form->errors();
 ?>
+<section>
 <ul>
-  <li>
+  <li class="form-group">
     <?php
-    echo $this->Form->Label('Name', 'Name');
-    echo $this->Form->TextBox('Name');
+    echo $this->Form->labelWrap('Name', 'Name');
+    echo $this->Form->textBoxWrap('Name');
     ?>
   </li>
-  <li id="ActionIcons">
-    <?php
-    echo $this->Form->Label('Icon');
-    foreach($this->Data('Icons') as $Icon) {
-      $Class = 'React' . $Icon;
-      $Selected = '';
-      if($OriginalCssClass == $Class) {
-        $Selected = 'Selected';
-      }
-      echo Img('applications' . DS . 'yaga' . DS . 'design' . DS . DS . 'images' . DS . 'action-icons' . DS . $Icon . '.png', array('title' => $Icon, 'data-class' => $Class, 'class' => $Selected));
-    }
-    ?>
-  </li>
-  <li>
-    <?php
-    echo $this->Form->Label('Description', 'Description');
-    echo $this->Form->TextBox('Description');
-    ?>
-  </li>
-  <li>
-    <?php
-    echo $this->Form->Label('Tooltip', 'Tooltip');
-    echo $this->Form->TextBox('Tooltip');
-    ?>
-  </li>
-  <li>
-    <?php
-    echo $this->Form->Label('Award Value', 'AwardValue');
-    echo $this->Form->TextBox('AwardValue');
-    ?>
-  </li>
-  <li id="AdvancedActionSettings">
-    <span><?php echo T('Advanced Settings'); ?></span>
-    <div>
+  <li class="form-group">
+    <?php echo $this->Form->labelWrap('Icon'); ?>
+    <div class="input-wrap">
+      <div id="ActionIcons" class="form-control">
         <?php
-        echo $this->Form->Label('Css Class', 'CssClass');
-        echo $this->Form->TextBox('CssClass');
+        foreach($this->data('Icons') as $icon) {
+          $class = 'React' . $icon;
+          $selected = '';
+          if($this->Form->getValue('CssClass') == $class) {
+            $selected = 'Selected';
+          }
+          echo img(
+            'applications/yaga/design/images/action-icons/' . $icon . '.png',
+            ['title' => $icon, 'data-class' => $class, 'class' => $selected]
+          );
+        }
         ?>
       </div>
-      <div>
-        <?php
-        echo $this->Form->Label('Permission', 'Permission');
-        echo Wrap(T('Yaga.Action.PermDesc'), 'p');
-        echo $this->Form->Dropdown('Permission', $this->Data('Permissions'));
-        ?>
-      </div>
+    </div>
+  </li>
+  <li class="form-group">
+    <?php
+    echo $this->Form->labelWrap('Description', 'Description');
+    echo $this->Form->textBoxWrap('Description');
+    ?>
+  </li>
+  <li class="form-group">
+    <?php
+    echo $this->Form->labelWrap('Tooltip', 'Tooltip');
+    echo $this->Form->textBoxWrap('Tooltip');
+    ?>
+  </li>
+  <li class="form-group">
+    <?php
+    echo $this->Form->labelWrap('Award Value', 'AwardValue');
+    echo $this->Form->textBoxWrap('AwardValue');
+    ?>
   </li>
 </ul>
+</section>
+<h4><?php echo Gdn::translate('Advanced Settings'); ?></h4>
+<section>
+  <ul>
+    <li class="form-group">
+      <?php
+      echo $this->Form->labelWrap('Css Class', 'CssClass');
+      echo $this->Form->textBoxWrap('CssClass');
+      ?>
+    </li>
+    <li class="form-group">
+      <div class="label-wrap">
+        <?php echo $this->Form->label('Permission', 'Permission'); ?>
+        <div class="info"><?php echo Gdn::translate('Yaga.Action.PermDesc'); ?></div>
+      </div>
+      <div class="input-wrap">
+        <?php echo $this->Form->dropdown('Permission', $this->data('Permissions')); ?>
+      </div>
+    </li>
+  </ul>
+</section>
 <?php
-echo $this->Form->Close('Save');
+echo $this->Form->close('Save');
