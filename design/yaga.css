@@ -37,6 +37,11 @@
   cursor: pointer;
 }
 
+#ActionIcons .Selected {
+  border: 1px;
+  background-color: #cfcfcf;
+}
+
 #Actions li {
   border: 1px solid #e0e0e0;
   border-right: none;
