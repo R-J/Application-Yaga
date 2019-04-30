@@ -64,7 +64,7 @@ echo $this->Form->errors();
     <li class="form-group">
       <?php
       echo $this->Form->labelWrap('Css Class', 'CssClass');
-      echo $this->Form->textBoxWrap('CssClass');
+      echo $this->Form->textBoxWrap('CssClass', ['id' => 'CssClass']);
       ?>
     </li>
     <li class="form-group">
@@ -80,3 +80,4 @@ echo $this->Form->errors();
 </section>
 <?php
 echo $this->Form->close('Save');
+?>
