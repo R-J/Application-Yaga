@@ -26,6 +26,43 @@ jQuery(document).ready(function($) {
     }
   });
 
+  // Change selected icon when css class is manually entered
+  document.addEventListener('keyup', function(e) {
+    if (e.target.id != 'CssClass') {
+      return;
+    }
+    // Remove .Selected from previous icon
+    var selectedIcon = document.querySelector('#ActionIcons img.Selected');
+    if (selectedIcon) {
+      selectedIcon.classList.remove('Selected');
+    }
+    // Add .Selected to the corresponding element
+    var actionIcon = document.querySelector('#ActionIcons img[data-class="' + e.target.value + '"]');
+    if (actionIcon) {
+      actionIcon.classList.add('Selected');
+    }
+  }, false);
+
+  // Change text in css class when icon is clicked
+  document.addEventListener('click', function(e) {
+    if (e.target.parentNode.id != 'ActionIcons') {
+      return;
+    }
+    if (e.target.tagName.toLowerCase() != 'img') {
+      return;
+    }
+    var newCssClass = 'React' + e.target.getAttribute('title');
+    // Show new css class in input box
+    document.getElementById('CssClass').value = newCssClass;
+    // Remove .Selected from previous icon
+    var selectedIcon = document.querySelector('#ActionIcons img.Selected');
+    if (selectedIcon) {
+      selectedIcon.classList.remove('Selected');
+    }
+    // Add .Selected to the clicked element
+    e.target.classList.add('Selected');
+  }, false);
+
   // Wait to hide things after a popup reveal has happened
   $('body').on('popupReveal', function() {
 
@@ -35,23 +72,6 @@ jQuery(document).ready(function($) {
       $(this).siblings().slideToggle();
     });
 
-    // If someone types in the class manually, deselect icons and select if needed
-    $("input[name='CssClass']").on('input', function() {
-      $('#ActionIcons img.Selected').removeClass('Selected');
-
-      var FindCssClass = $(this).val();
-      if(FindCssClass.length) {
-        $("#ActionIcons img[data-class='" + CurrentCssClass + "']").addClass('Selected');
-      }
-    });
-
-    $('#ActionIcons img').click(function() {
-      var newCssClass = 'React' + $(this).attr('title');
-      $("input[name='CssClass']").val(newCssClass);
-      $('#ActionIcons img.Selected').removeClass('Selected');
-      $(this).addClass('Selected');
-    });
-    
     var DeleteForm = $("form[action*='action/delete']");
     var OtherAction = DeleteForm.find('select');
     OtherAction.hide();
